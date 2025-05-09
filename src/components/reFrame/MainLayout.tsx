@@ -89,6 +89,13 @@ const main_frame_css = (naviBarHeight: number) => css({
     userSelect: "none",
     background: "white",
     ...cssPresets.flexCenter,
+    zIndex:999,
+    position: "sticky", // 使用 sticky 定位
+    top: 0, // 滚动到顶部时固定
+    left:0,
+    right:0,
+    boxShadow: "0px 0px 9px 0px rgba(0, 0, 0, 0.05)",
+
   },
   "&.main_window": {
     userSelect: "none",

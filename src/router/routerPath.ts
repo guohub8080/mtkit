@@ -9,6 +9,7 @@ export default {
 	mobile_scoreChecker: "m.q.score",
 	settings: "settings",
 	spiano: "s.piano",
+	beats: "beats",
 	temp251: "temp251",
 	chordDisplay: "chord",
 	findNotes: "n.find",

@@ -9,6 +9,7 @@ import author_svg from "@/router/svgComps/author_svg.svg"
 import series_svg from "@/router/svgComps/series_svg.svg"
 import temp251_svg from "@/router/svgComps/temp251_svg.svg"
 import midi_svg from "@/router/svgComps/midi_svg.svg"
+import clap_svg from "@/router/svgComps/clap_svg.svg"
 import kbd_svg from "@/router/svgComps/kbd_svg.svg"
 import exam_svg from "@/router/svgComps/exam_svg.svg"
 import upgrade_svg from "@/router/svgComps/update_svg.svg"
@@ -90,6 +91,13 @@ export default [
 		title: "五度圈",
 		subtitle: "可带有指针或旋转功能",
 		imgURL: circle_svg,
+		type: "all"
+	},
+	{
+		link: `/${routerPath.beats}`,
+		title: "节拍与速度",
+		subtitle: "给定速度打节拍/计算BPM",
+		imgURL: clap_svg,
 		type: "all"
 	},
 	{

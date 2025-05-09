@@ -12,12 +12,12 @@ import {useMemo} from "react";
 
 const colorList = [
 	{backgroundColor: googleColors.yellow200, color: googleColors.yellow900},
-	{backgroundColor: googleColors.orange200, color: googleColors.orange900},
 	{backgroundColor: googleColors.green200, color: googleColors.green900},
+	{backgroundColor: googleColors.orange200, color: googleColors.orange900},
 	{backgroundColor: googleColors.blue200, color: googleColors.blue900},
-	{backgroundColor: googleColors.purple200, color: googleColors.purple700},
 	{backgroundColor: googleColors.deepOrange200, color: googleColors.red800},
-	{backgroundColor: googleColors.blueGray100, color: googleColors.blueGray400},
+	{backgroundColor: googleColors.indigo200, color: googleColors.indigo700},
+	{backgroundColor: googleColors.pink200, color: googleColors.pink700},
 ]
 
 

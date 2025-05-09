@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import KeyStrokeFindChord1Result from "@/apps/MidiMessage/components/KeyStrokeFindChord1Result.tsx";
+import KeyStrokeFindChord1Result from "@/apps/Spiano/components/KeyStrokeFindChord1Result.tsx";
 import googleColors from "@/assets/colors/googleColors.ts";
 import cssPresets from "@/assets/styles/cssPresets.ts";
 import * as music12 from "@/music12";

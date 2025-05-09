@@ -5,6 +5,8 @@ const citeItems = [
 	"KeyboardJS",
 	"react-hotkeys-hook",
 	"timidity",
+	"use-sound",
+	"howler",
 	"React",
 	"@emotion/react",
 	"typescript",

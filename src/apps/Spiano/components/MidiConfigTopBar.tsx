@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import MidiConfigPopover from "@/apps/MidiMessage/components/MidiConfigPopover.tsx";
+import MidiConfigPopover from "@/apps/Spiano/components/MidiConfigPopover.tsx";
 import googleColors from "@/assets/colors/googleColors.ts";
 import useInstrument from "@/assets/instruments/useInstrument.ts";
 import useMIDIConfig from "@/assets/stores/useMIDIConfig.ts";

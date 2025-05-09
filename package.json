@@ -54,6 +54,7 @@
     "stream-browserify": "^3.0.0",
     "styled-components": "^6.1.13",
     "tone": "^15.0.4",
+    "use-sound": "^5.0.0",
     "usehooks-ts": "^2.16.0",
     "vexflow": "^4.2.5",
     "webaudio-tinysynth": "^1.1.3",

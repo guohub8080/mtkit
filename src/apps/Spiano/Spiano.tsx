@@ -1,8 +1,8 @@
-import MidiConfigTopBar from "@/apps/MidiMessage/components/MidiConfigTopBar.tsx";
-import KeyStrokeAnalysis from "@/apps/MidiMessage/parts/KeyStrokeAnalysis.tsx";
-import MainNoMIDI from "@/apps/MidiMessage/parts/MainNoMIDI.tsx";
-import MidiEventsList from "@/apps/MidiMessage/parts/MidiEventsList.tsx";
-import MidiPiano from "@/apps/MidiMessage/parts/MidiPiano.tsx";
+import MidiConfigTopBar from "@/apps/Spiano/components/MidiConfigTopBar.tsx";
+import KeyStrokeAnalysis from "@/apps/Spiano/parts/KeyStrokeAnalysis.tsx";
+import MainNoMIDI from "@/apps/Spiano/parts/MainNoMIDI.tsx";
+import MidiEventsList from "@/apps/Spiano/parts/MidiEventsList.tsx";
+import MidiPiano from "@/apps/Spiano/parts/MidiPiano.tsx";
 import googleColors from "@/assets/colors/googleColors.ts";
 import useInstrument from "@/assets/instruments/useInstrument.ts";
 import useGlobalSettings from "@/assets/stores/useGlobalSettings.ts";
@@ -59,7 +59,7 @@ const FullFrame = (props: {
 }) => {
 	return <div style={{width: "100%", ...cssFunctions.px(15), ...cssPresets.flexCenter}}>{props.children}</div>
 }
-const MidiMessage = () => {
+const Spiano = () => {
 	const {isWebMidiSupport, isJzzEngineReady} = useMIDIReady()
 	const {noteOnNumList, latestEvent} = useMidiEvents()
 	const {naviBarHeight} = useGlobalSettings()
@@ -101,7 +101,7 @@ const MidiMessage = () => {
 	</div>
 };
 
-export default MidiMessage;
+export default Spiano;
 
 const miditest_css = (naviBarHeight: number) => css({
 	...cssPresets.flexCenter,

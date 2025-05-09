@@ -1,4 +1,5 @@
 import About from "@/apps/Aboout/About.tsx";
+import Beats from "@/apps/Beats/Beats.tsx";
 import Interval from "@/apps/Interval/Interval.tsx";
 import TabletScaleQuery from "@/apps/TabletScaleQuery/TabletScaleQuery.tsx";
 import UpgradeLog from "@/apps/UpgradeLog/UpgradeLog.tsx";
@@ -18,7 +19,7 @@ import FindNotesInChordOrScale from "@/apps/FindNotesInChordOrScale/FindNotesInC
 import FindNotesWithInterval from "@/apps/FindNotesWithInterval/FindNotesWithInterval.tsx";
 import HarmonicSeries from "@/apps/HarmonicSeries/HarmonicSeries.tsx";
 import Author from "@/apps/Author/Author.tsx";
-import MidiMessage from "@/apps/MidiMessage/MidiMessage.tsx";
+import Spiano from "@/apps/Spiano/Spiano.tsx";
 import StaveExam from "@/apps/StaveExam/StaveExam.tsx";
 import AutoRedirect from "@/apps/AutoRedirect/AutoRedirect.tsx";
 
@@ -85,6 +86,10 @@ const r = createHashRouter([
 				element: <CircleOfFifths/>
 			},
 			{
+				path: routerPath.beats,
+				element: <Beats/>
+			},
+			{
 				path: routerPath.mobile_scoreChecker,
 				element: <MobileScoreChecker/>
 			},
@@ -93,8 +98,8 @@ const r = createHashRouter([
 			//   element: <StaveExam/>
 			// },
 			{
-			  path: routerPath.spiano,
-			  element: <MidiMessage/>
+				path: routerPath.spiano,
+				element: <Spiano/>
 			},
 			{
 				path: routerPath.temp251,

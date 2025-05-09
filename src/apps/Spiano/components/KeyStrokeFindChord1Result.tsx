@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import TransformedNote from "@/apps/MidiMessage/components/TransformedNote.tsx";
+import TransformedNote from "@/apps/Spiano/components/TransformedNote.tsx";
 import googleColors from "@/assets/colors/googleColors.ts";
 import cssPresets from "@/assets/styles/cssPresets.ts";
 import NoteChordSymbol from "@/components/reNote/ChordText/NoteChordSymbol.tsx";

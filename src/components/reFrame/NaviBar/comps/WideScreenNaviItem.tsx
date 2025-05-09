@@ -76,15 +76,16 @@ const navi_item_css = (itemH: number, itemW: number, iconH: number) => css({
     alignItems:"start",
     flexDirection: "column",
     "& .title": {
-      
+
       // width: 80,
       fontSize:18,
       marginBottom:5,
       textAlign: "center",
       userSelect: "none",
+      color: googleColors.gray800,
     },
     "& .subtitle": {
-      
+
       fontSize: 12,
       color: googleColors.gray500,
     }

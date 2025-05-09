@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="_图层_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 200">
-  <!-- Generator: Adobe Illustrator 29.0.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 192)  -->
-  <defs>
-    <style>
-      .st0 {
-        fill: #98bbf6;
-      }
-
-      .st1 {
-        fill: #0057e7;
-      }
-    </style>
-  </defs>
-  <path class="st1" d="M113.3,47.3v148.1h79.6V7.5h-79.6v39.8ZM129.2,23.4h47.8v156.1h-47.8v-12.7h28.7v-12.7h-28.7v-11.2h15.9v-12.7h-15.9v-11.2h28.7v-12.7h-28.7v-11.2h15.9v-12.7h-15.9v-11.2h28.7v-12.7h-28.7v-11.2h15.9v-12.7h-15.9v-11.2Z"/>
-  <polygon class="st0" points="4.9 23.4 47.8 23.4 16.8 54.4 28.1 65.7 40 53.8 40 149.1 28.1 137.2 16.8 148.5 47.8 179.5 4.9 179.5 4.9 195.4 100.5 195.4 100.5 179.5 48.1 179.5 79.1 148.5 67.8 137.2 55.9 149.1 55.9 53.8 67.8 65.7 79.1 54.4 48.1 23.4 100.5 23.4 100.5 7.5 4.9 7.5 4.9 23.4"/>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="_图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 200 200" style="enable-background:new 0 0 200 200;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#346AD7;}
+	.st1{fill:#98BBF6;}
+</style>
+<path class="st0" d="M113.3,47.3v148.1h79.6V7.5h-79.6C113.3,7.5,113.3,47.3,113.3,47.3z M129.2,23.4H177v156.1h-47.8v-12.7h28.7
+	v-12.7h-28.7v-11.2h15.9v-12.7h-15.9V119h28.7v-12.7h-28.7V95.1h15.9V82.4h-15.9V71.2h28.7V58.5h-28.7V47.3h15.9V34.6h-15.9V23.4
+	L129.2,23.4z"/>
+<polygon class="st1" points="4.9,23.4 47.8,23.4 16.8,54.4 28.1,65.7 40,53.8 40,149.1 28.1,137.2 16.8,148.5 47.8,179.5 4.9,179.5 
+	4.9,195.4 100.5,195.4 100.5,179.5 48.1,179.5 79.1,148.5 67.8,137.2 55.9,149.1 55.9,53.8 67.8,65.7 79.1,54.4 48.1,23.4 
+	100.5,23.4 100.5,7.5 4.9,7.5 "/>
 </svg>
