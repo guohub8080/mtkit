@@ -10,6 +10,7 @@ const KeyStrokeFindChordMoreResult = (props: {
 	rootNotePitch: number
 }) => {
 	const realRootNoteRadix = new music12.Radix.Base12Radix(props.rootNotePitch)
+
 	//含有根音，只可能有一个和弦
 	const includeRootChordList = props.chordInfos.filter(x => x.rootNoteLocation === realRootNoteRadix.lastDigit)
 
@@ -17,20 +18,23 @@ const KeyStrokeFindChordMoreResult = (props: {
 	const notIncludeRootChordList = props.chordInfos.filter(x => x.rootNoteLocation !== realRootNoteRadix.lastDigit)
 
 	const sideFontSize = includeRootChordList.length === 0 ? 40 : 30
+
 	return <div css={KeyStrokeMore_css}>
 		<div className="fd">和弦</div>
 		{includeRootChordList.length > 0 &&
 			<div className="chord_ir">
 				{includeRootChordList.map((x, y) => {
-					return <KeyStrokeFindChord1Result  key={y} hideTitle={true} chordInfo={x}
-					                                  rootNotePitch={props.rootNotePitch}/>
+					return <KeyStrokeFindChord1Result
+						key={y} hideTitle={true} chordInfo={x}
+						rootNotePitch={props.rootNotePitch}/>
 				})}
 			</div>}
 		{notIncludeRootChordList.length > 0 && <div className="chord_nir">
 			{notIncludeRootChordList.map((x, y) => {
-				return <KeyStrokeFindChord1Result fontSize={sideFontSize} key={y} hideTitle={true}
-				                                  chordInfo={x}
-				                                  rootNotePitch={props.rootNotePitch}/>
+				return <KeyStrokeFindChord1Result
+					fontSize={sideFontSize} key={y} hideTitle={true}
+					chordInfo={x}
+					rootNotePitch={props.rootNotePitch}/>
 			})}
 		</div>}
 

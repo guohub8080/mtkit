@@ -9,7 +9,7 @@
     user-select: none !important;
     -webkit-user-select: none !important;
     -webkit-overflow-scrolling: touch;
-    font-family: "misans-m-fh", "misans-m-2500", "misans-m-ex1000", "PingFang SC", "Heiti SC", "Microsoft YaHei", "微软雅黑", "Helvetica", "WenQuanYi Micro Hei", serif !important;
+    font-family: "misans-m-fh", "misans-m-2500", "misans-m-ex1000", tnr, "PingFang SC", "Heiti SC", "Microsoft YaHei", "微软雅黑", "Helvetica", "WenQuanYi Micro Hei", serif !important;
 }
 
 :root {

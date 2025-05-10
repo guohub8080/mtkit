@@ -71,7 +71,9 @@ const useMetronome = () => {
 		if (isMetronomePlaying) stopPlayback();
 		const adjustedBpm = beatType === "6/8" ? bpm / 2 : bpm;
 		transport.current.bpm.value = adjustedBpm;
-		console.log(`[BPM变更] 新BPM：${adjustedBpm}`);
+		if (import.meta.env.DEV) {
+			console.log(`[BPM变更] 新BPM：${adjustedBpm}`);
+		}
 	}, [bpm, beatType]);
 
 	// 节奏类型变化处理
@@ -97,8 +99,9 @@ const useMetronome = () => {
 		// const adjustedBpm = beatType === "6/8" ? bpm / 2 : bpm;
 		const interval = beatType === "6/8" ? 30 / bpm : 60 / bpm;
 		const intervalTone = `${interval}n`;
-		console.log(`[调度配置] 节奏：${beatType}，BPM：${bpm}，间隔：${interval.toFixed(3)}s`);
-
+		if (import.meta.env.DEV) {
+			console.log(`[调度配置] 节奏：${beatType}，BPM：${bpm}，间隔：${interval.toFixed(3)}s`);
+		}
 		// 彻底清除旧调度并重置Transport时间
 		transport.current.stop();
 		transport.current.cancel();
@@ -110,7 +113,9 @@ const useMetronome = () => {
 			lastBeatTime.current = startTime;
 			beatIndexRef.current = 1; // 重置节拍索引，这里是从1开始
 			setBeatIndexOfMeasure(0);
-			console.log(`[首拍触发] ${firstAccent}，时间：${startTime.toFixed(3)}s`);
+			if (import.meta.env.DEV) {
+				console.log(`[首拍触发] ${firstAccent}，时间：${startTime.toFixed(3)}s`);
+			}
 		}, 0);
 
 		// 后续节拍按间隔重复（相对于Transport时间，从interval偏移开始）
@@ -121,18 +126,20 @@ const useMetronome = () => {
 			const actualInterval = time - lastBeatTime.current;
 			lastBeatTime.current = time;
 			beatIndexRef.current = (beatIndexRef.current + 1) % currentPattern.beatsPerMeasure;
-
-			console.log(`[节拍触发] 当前节拍索引: ${beatIndexRef.current}`); // 添加日志
+			if (import.meta.env.DEV) {
+				console.log(`[节拍触发] 当前节拍索引: ${beatIndexRef.current}`); // 添加日志
+			}
 			if (beatIndexRef.current === 0) {
 				setBeatIndexOfMeasure(currentPattern.accentMap.length - 1);
 			} else {
 				setBeatIndexOfMeasure(beatIndexRef.current - 1);
 			}
-
-			console.log(
-				`[节拍触发] ${accentType}，时间：${(time + startTime).toFixed(3)}s，` +
-				`预期间隔：${interval.toFixed(3)}s，实际间隔：${actualInterval.toFixed(3)}s`
-			);
+			if (import.meta.env.DEV) {
+				console.log(
+					`[节拍触发] ${accentType}，时间：${(time + startTime).toFixed(3)}s，` +
+					`预期间隔：${interval.toFixed(3)}s，实际间隔：${actualInterval.toFixed(3)}s`
+				);
+			}
 		}, intervalTone, interval); // 从interval偏移开始，即startTime + interval
 	}, [beatType, bpm, isMetronomeReady]);
 
@@ -140,11 +147,15 @@ const useMetronome = () => {
 	const startPlayback = useCallback(() => {
 		setBeatIndexOfMeasure(0)
 		if (!isMetronomeReady) {
-			console.warn("[播放失败] 音频未加载完成");
+			if (import.meta.env.DEV) {
+				console.warn("[播放失败] 音频未加载完成");
+			}
 			return;
 		}
 		if (isMetronomePlaying) {
-			console.log("[操作] 已在播放中，跳过重复启动");
+			if (import.meta.env.DEV) {
+				console.log("[操作] 已在播放中，跳过重复启动");
+			}
 			return;
 		}
 
@@ -153,7 +164,9 @@ const useMetronome = () => {
 		setBeatIndexOfMeasure(0); // 手动更新第一拍的索引
 		scheduleBeats(startTime);
 		transport.current.start(); // 启动Transport，基于已设置的startTime
-		console.log(`[操作] 开始播放，起始时间：${startTime.toFixed(3)}s`);
+		if (import.meta.env.DEV) {
+			console.log(`[操作] 开始播放，起始时间：${startTime.toFixed(3)}s`);
+		}
 	}, [isMetronomeReady, isMetronomePlaying, scheduleBeats]);
 
 	// 停止控制
@@ -173,7 +186,9 @@ const useMetronome = () => {
 		beatIndexRef.current = 0;
 		lastBeatTime.current = 0;
 		setBeatIndexOfMeasure(0);
-		console.log(`[操作] 停止播放，当前Tone时间：${Tone.now().toFixed(3)}s`);
+		if (import.meta.env.DEV) {
+			console.log(`[操作] 停止播放，当前Tone时间：${Tone.now().toFixed(3)}s`);
+		}
 	}, [isMetronomePlaying]);
 
 	// 组件卸载清理
@@ -182,7 +197,9 @@ const useMetronome = () => {
 		players.current.weak.dispose();
 		players.current.medium.dispose();
 		players.current.strong.dispose();
-		console.log("[系统] 组件卸载，资源已释放");
+		if (import.meta.env.DEV) {
+			console.log("[系统] 组件卸载，资源已释放");
+		}
 	}, []);
 
 	const measureLength = useMemo(() => rhythmPatterns[beatType].accentMap.length, [beatType]);

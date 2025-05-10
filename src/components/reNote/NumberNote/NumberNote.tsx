@@ -17,7 +17,8 @@ const NumberNote = (props: {
 	const isRomeStyle = byDefault(props.isRomeStyle, false)
 	if (props.alter === 0) {
 		return <div css={NumberNote_css(props.fontSize, props.color, props.alter, align, isRomeStyle)}>
-			<div className="num">{isRomeStyle ? romeNum[props.num] : props.num}</div>
+			<div className="num"
+			     style={isRomeStyle ? {fontFamily: "tnr"} : void 0}>{isRomeStyle ? romeNum[props.num] : props.num}</div>
 		</div>
 	}
 	return <div css={NumberNote_css(props.fontSize, props.color, props.alter, align, isRomeStyle)}>
@@ -40,7 +41,6 @@ const NumberNote_css = (fontSize: number,
 		...cssPresets.flexCenter,
 		justifyContent: align,
 		"& .num": {
-			fontFamily: isRomeStyle ? "tnr" : void 0,
 			fontSize: fontSize,
 			color: color,
 			marginRight: numberMR,

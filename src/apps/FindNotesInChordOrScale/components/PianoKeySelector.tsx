@@ -108,9 +108,7 @@ const PianoKeySelector = () => {
 					setDetailChordKeyAndLocation(void 0)
 				}}>清空
 				</div>
-
 			</div>
-
 		</div>
 	</>
 }

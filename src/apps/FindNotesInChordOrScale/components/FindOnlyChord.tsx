@@ -1,4 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
+import FindOnlyChordInComplex from "@/apps/FindNotesInChordOrScale/components/FindOnlyChordInComplex.tsx";
 import NoWrapSection from "@/components/common/NoWrapSection.tsx";
 import {css} from "@emotion/react";
 import {useEffect, useRef, useState} from "react";
@@ -47,19 +48,6 @@ const FindOnlyChord = () => {
 				{x.cnName}和弦
 			</div>
 		</div>)}
-		<div style={{
-			display: isNoteStrictIn ? "block" : "none",
-			width: 150,
-			marginTop: 25,
-			color: googleColors.gray500,
-			marginLeft: "auto",
-			marginRight: "auto"
-		}}>
-			<NoWrapSection t={"找不到复杂的和弦？"}/>
-			<NoWrapSection t={"推荐试试"}/>
-			<NoWrapSection t={"「超级钢琴」"}/>
-		</div>
-
 	</div>
 }
 
@@ -67,7 +55,6 @@ export default FindOnlyChord
 
 const FindOnlyChord_css = css({
 	width: "100%",
-	paddingBottom: 50,
 	"& .line:not(:first-of-type)": {
 		borderTop: `1px solid ${googleColors.gray300}`
 	},

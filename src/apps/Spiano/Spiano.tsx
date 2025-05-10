@@ -14,9 +14,7 @@ import useMidiKeyboardPlay from "@/utils/useMIDI/useMidiKeyboardPlay.ts";
 import useMIDIPorts from "@/utils/useMIDI/useMIDIPorts.ts";
 import useMIDIReady from "@/utils/useMIDI/useMIDIReady.ts";
 import {css} from "@emotion/react";
-import {keys, random} from "lodash";
 import React, {CSSProperties, ReactNode, useEffect, useRef, useState} from 'react';
-import {useHotkeys} from 'react-hotkeys-hook';
 
 // const keyMap = {
 // 	"a": 60,
@@ -42,7 +40,6 @@ const NoMidiSupport = ({isWebMidiSupport, isJzzEngineReady, outputs, inputs}) =>
 				hasRendered.current = true;
 			}
 		}, 3000);
-
 		return () => clearTimeout(timer);
 	}, [isWebMidiSupport, isJzzEngineReady, outputs.length, inputs.length]);
 
@@ -65,26 +62,13 @@ const Spiano = () => {
 	const {naviBarHeight} = useGlobalSettings()
 	const {outputs, inputs} = useMIDIPorts()
 	const {isMidiEventListShow, isPianoKeyboardShow, isAnalyzeShow} = useMIDIConfig()
-	// const {isLoaded} = useInstrument()
-	// //绑定键盘事件
-	// useHotkeys(keyList, e => {
-	// 	if (e.repeat) return;
-	// 	if (e.type === "keydown") {
-	// 		currentOutPort.noteOn(0, keyMap[e.key], random(80, 125))
-	// 	} else {
-	// 		currentOutPort.noteOff(0, keyMap[e.key])
-	// 	}
-	// }, {
-	// 	keyup: true,
-	// 	keydown: true,
-	// })
 	const {player, setMidiLog} = useMidiKeyboardPlay()
 
 	useEffect(() => {
 		setMidiLog(false)
 	}, [latestEvent])
 
-	return <div css={miditest_css(naviBarHeight)}>
+	return <div css={MidiTest_css(naviBarHeight)}>
 		<MidiConfigTopBar/>
 		<div className="main_inner_frame">
 			{isPianoKeyboardShow && <MidiPiano/>}
@@ -103,7 +87,7 @@ const Spiano = () => {
 
 export default Spiano;
 
-const miditest_css = (naviBarHeight: number) => css({
+const MidiTest_css = (naviBarHeight: number) => css({
 	...cssPresets.flexCenter,
 	flexDirection: "column",
 	fontSize: 20,
