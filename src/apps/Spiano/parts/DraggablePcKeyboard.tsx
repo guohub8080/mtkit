@@ -49,11 +49,18 @@ const DraggablePcKeyboard = () => {
 					delay(10).then(() => setIsSwitchMiniAllowed(true))
 				}}>
 				<div className="handle">
-					{isPcKeyboardShowButMini && <div className="mini_f" onClick={(e) => {
-						if (isDragging) return;
-						if (!isSwitchMiniAllowed) return;
-						setIsPcKeyboardShowButMini(false)
-					}}>
+					{isPcKeyboardShowButMini && <div
+						className="mini_f"
+						onTouchEnd={() => {
+							if (isDragging) return;
+							if (!isSwitchMiniAllowed) return;
+							setIsPcKeyboardShowButMini(false)
+						}}
+						onClick={(e) => {
+							if (isDragging) return;
+							if (!isSwitchMiniAllowed) return;
+							setIsPcKeyboardShowButMini(false)
+						}}>
 						<div className="mini_icon">
 							<FaKeyboard color={googleColors.gray400} size={60}/>
 							<div className="dot"></div>
@@ -65,10 +72,14 @@ const DraggablePcKeyboard = () => {
 							<div className="btn move_btn">
 								<BsArrowsMove color={googleColors.green600} size={20}/>
 							</div>
-							<div className="btn mini_btn" onClick={() => setIsPcKeyboardShowButMini(true)}>
+							<div className="btn mini_btn"
+							     onTouchEnd={() => setIsPcKeyboardShowButMini(true)}
+							     onClick={() => setIsPcKeyboardShowButMini(true)}>
 								<BiMinus color={googleColors.amber600} size={20}/>
 							</div>
-							<div className="btn close_btn" onClick={() => setIsPcKeyboardShow(false)}>
+							<div className="btn close_btn"
+							     onTouchEnd={() => setIsPcKeyboardShow(false)}
+							     onClick={() => setIsPcKeyboardShow(false)}>
 								<CgClose color={googleColors.red200} size={20}/>
 							</div>
 
