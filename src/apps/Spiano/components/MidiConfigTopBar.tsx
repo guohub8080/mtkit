@@ -2,6 +2,7 @@
 import MidiConfigPopover from "@/apps/Spiano/components/MidiConfigPopover.tsx";
 import googleColors from "@/assets/colors/googleColors.ts";
 import useInstrument from "@/assets/instruments/useInstrument.ts";
+import useGlobalSettings from "@/assets/stores/useGlobalSettings.ts";
 import useMIDIConfig from "@/assets/stores/useMIDIConfig.ts";
 import cssPresets from "@/assets/styles/cssPresets.ts";
 import warningToast from "@/utils/warningToast.tsx";
@@ -10,9 +11,12 @@ import {SpinLoading} from "antd-mobile";
 import toast, {Toaster} from "react-hot-toast";
 import {AiFillSound} from "react-icons/ai";
 import {BiHide} from "react-icons/bi";
+import {BsKeyboard} from "react-icons/bs";
+import {CgKeyboard} from "react-icons/cg";
 import {FaVolumeMute} from "react-icons/fa";
+import {FaKeyboard} from "react-icons/fa6";
 import {IoReloadOutline, IoSettingsOutline} from "react-icons/io5";
-import {MdPiano} from "react-icons/md";
+import {MdKeyboardDoubleArrowDown, MdPiano} from "react-icons/md";
 import {RiSearchEyeFill} from "react-icons/ri";
 import {TbListNumbers} from "react-icons/tb";
 
@@ -31,9 +35,11 @@ const MidiConfigTopBar = () => {
 		setIsPianoKeyboardShow,
 		isAnalyzeShow,
 		setIsAnalyzeShow,
+		isPcKeyboardShow,
+		setIsPcKeyboardShow
 	} = useMIDIConfig()
 	const {isLoaded} = useInstrument()
-
+	const {isWideScreen} = useGlobalSettings()
 	const toggleMidiEventListShow = () => {
 		if (isMidiEventListShow) {
 			toast.success("MIDI事件列表已关闭", {duration: 800})
@@ -76,7 +82,8 @@ const MidiConfigTopBar = () => {
 		<Toaster/>
 		<MidiConfigPopover/>
 		<div
-			css={MidiConfigTopBar_css(isMidiKeyStrokeSoundOn, isMidiEventListShow, isLoaded, isPianoKeyboardShow, isAnalyzeShow)}>
+			css={MidiConfigTopBar_css(isMidiKeyStrokeSoundOn,
+				isMidiEventListShow, isLoaded, isPianoKeyboardShow, isAnalyzeShow, isWideScreen, isPcKeyboardShow)}>
 			<div className="icon analyse" onClick={toggleAnalyze}>
 				{isAnalyzeShow && <RiSearchEyeFill size={25} color={activeMainColor}/>}
 				{!isAnalyzeShow && <BiHide size={22} color={unActiveMainColor}/>}
@@ -98,6 +105,10 @@ const MidiConfigTopBar = () => {
 			<div className="icon settings" onClick={() => setIsMidiConfigPopoverOpen(true)}>
 				<IoSettingsOutline size={22} color={googleColors.blue800}/>
 			</div>
+			{isWideScreen && < div className="icon isPcKeyboardShow" onClick={() => setIsPcKeyboardShow(!isPcKeyboardShow)}>
+				<FaKeyboard size={22} color={isPcKeyboardShow ? googleColors.blue800 : googleColors.gray500}/>
+			</div>}
+
 		</div>
 	</>
 }
@@ -108,12 +119,14 @@ const MidiConfigTopBar_css = (isMidiKeyStrokeSoundOn: boolean,
                               isMidiEventListShow: boolean,
                               isLoaded: boolean,
                               isPianoKeyboardShow: boolean,
-                              isAnalyzeShow: boolean) => css({
-	width: "100%",
+                              isAnalyzeShow: boolean,
+                              isWideScreen: boolean, isPcKeyboardShow: boolean) => css({
+	width: "calc(100vw)",
+	overflowY: "auto",
 	height: 60,
 	// backgroundColor: googleColors.green100,
 	...cssPresets.flexCenter,
-	gap: 15,
+	gap: isWideScreen ? 10 : 15,
 	"&>div": {
 		height: 40
 	},
@@ -168,6 +181,12 @@ const MidiConfigTopBar_css = (isMidiKeyStrokeSoundOn: boolean,
 		border: `1px solid ${isMidiEventListShow ? activeMainColor : googleColors.gray500}`,
 		...cssPresets.flexCenter,
 		backgroundColor: isMidiEventListShow ? "white" : unActiveBgColor,
+	},
+	"& .isPcKeyboardShow": {
+		fontSize: 20,
+		border: `1px solid ${isPcKeyboardShow ? activeMainColor : googleColors.gray500}`,
+		...cssPresets.flexCenter,
+		backgroundColor: isPcKeyboardShow ? googleColors.blue100 : unActiveBgColor,
 	},
 	"& .reload": {
 		backgroundColor: googleColors.blue100

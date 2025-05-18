@@ -57,19 +57,13 @@ export default [
 		imgURL: chord_svg,
 	},
 	{
-		link: `/${routerPath.spiano}`,
-		title: "超级钢琴",
-		subtitle: "分析琴键/可搭配MIDI键盘使用",
-		imgURL: midi_svg,
-		type: "all"
-	},
-	{
 		link: `/${routerPath.mobile_scoreChecker}`,
 		title: "识谱辅助",
 		subtitle: "识别谱面并与钢琴键盘对应",
 		imgURL: score_svg,
 		type: "all"
 	},
+
 	{
 		link: `/${routerPath.findNotes}`,
 		title: "音符辞典",
@@ -85,7 +79,6 @@ export default [
 		type: "all"
 	},
 
-
 	{
 		link: `/${routerPath.circle}`,
 		title: "五度圈",
@@ -100,6 +93,8 @@ export default [
 		imgURL: clap_svg,
 		type: "all"
 	},
+
+
 	{
 		link: `/${routerPath.temp251}`,
 		title: "251查询",
@@ -114,6 +109,23 @@ export default [
 		imgURL: series_svg,
 		type: "all"
 	},
+
+	{
+		link: `/${routerPath.spiano}`,
+		title: "超级钢琴",
+		subtitle: "分析琴键/可搭配MIDI键盘使用",
+		imgURL: midi_svg,
+		type: "all"
+	},
+
+	{
+		link: `/${routerPath.keyboard}`,
+		title: "键盘演奏",
+		subtitle: "通过电脑键盘简单演奏",
+		imgURL: kbd_svg,
+		type: "tablet"
+	},
+
 	// {
 	//   link: `/${routerPath.staveExam}`,
 	//   title: "识谱小测试",
@@ -122,13 +134,7 @@ export default [
 	//   type: "all"
 	// },
 
-	// {
-	// 	link: `/${routerPath.keyboard}`,
-	// 	title: "键盘演奏",
-	// 	subtitle: "通过键盘简单演奏",
-	// 	imgURL: kbd_svg,
-	// 	type: "all"
-	// },
+
 	{
 		link: `/${routerPath.settings}`,
 		title: "设置",

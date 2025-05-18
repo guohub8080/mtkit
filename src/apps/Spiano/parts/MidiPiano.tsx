@@ -57,7 +57,6 @@ const MidiPiano = () => {
 	}, [noteOnNumWithOctaveList, pianoOctaveGapList])
 	const clickPiano = (octave: number, location: number) => {
 		const pitchValue = octave * 12 + location
-
 		setLatestEvent({
 			name: "乐理计算器", note: pitchValue, isNoteOn: !noteOnNumList.includes(pitchValue),
 			isNoteOff: noteOnNumList.includes(pitchValue),

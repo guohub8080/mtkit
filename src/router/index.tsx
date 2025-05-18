@@ -1,6 +1,7 @@
 import About from "@/apps/Aboout/About.tsx";
 import Beats from "@/apps/Beats/Beats.tsx";
 import Interval from "@/apps/Interval/Interval.tsx";
+import PcKeyboardPlay from "@/apps/PcKeyboardPlay/PcKeyboardPlay.tsx";
 import TabletScaleQuery from "@/apps/TabletScaleQuery/TabletScaleQuery.tsx";
 import UpgradeLog from "@/apps/UpgradeLog/UpgradeLog.tsx";
 import MainLayout from "@/components/reFrame/MainLayout.tsx";
@@ -92,6 +93,10 @@ const r = createHashRouter([
 			{
 				path: routerPath.mobile_scoreChecker,
 				element: <MobileScoreChecker/>
+			},
+			{
+				path: routerPath.keyboard,
+				element: <PcKeyboardPlay/>
 			},
 			// {
 			//   path: routerPath.staveExam,

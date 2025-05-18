@@ -1,3 +1,5 @@
+import useMidiPortsStore from "@/assets/stores/useMidiPortsStore.ts";
+import useMIDIPortsStore from "@/assets/stores/useMidiPortsStore.ts";
 import {useEffect} from "react";
 import JZZ from "jzz";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -12,44 +14,49 @@ import useMIDIConfig from "../../assets/stores/useMIDIConfig";
 Tiny(JZZ)
 Gear(JZZ)
 
-
 export default () => {
 	const {
-		isWebMidiSupport,
 		setIsWebMidiSupport,
-		isJzzEngineReady,
 		setIsJzzEngineReady,
-	} = useMIDIConfig()
-	// const [isWebMidiSupport, setIsWebMidiSupport] = useState(false)
+		isWebMidiSupport,
+		isJzzEngineReady,
+	} = useMIDIConfig();
+
+	const {initJzz} = useMidiPortsStore(); // 获取initJZZ方法
 
 	useEffect(() => {
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-expect-error
-		JZZ.synth.Tiny.register("WebAudio合成器");
-		navigator.requestMIDIAccess().then(() => {
-			setIsWebMidiSupport(true)
-		}).catch(() => {
-			setIsWebMidiSupport(false)
-		});
 
-		JZZ({sysex: true}).and(() => {
-			setIsJzzEngineReady(true)
-			midiOutReg()
-			midiInReg()
-		}).or(() => setIsJzzEngineReady(false))
-	}, [setIsJzzEngineReady, setIsWebMidiSupport])
+		// 检测WebMIDI支持
+		navigator.requestMIDIAccess()
+			.then(() => setIsWebMidiSupport(true))
+			.catch(() => setIsWebMidiSupport(false));
+
+		// 初始化JZZ引擎
+		const jzz = JZZ({sysex: true});
+		jzz.and(() => {
+			setIsJzzEngineReady(true);
+			initJzz(); // 调用initJZZ初始化并存储JZZ实例
+			midiOutReg();
+			midiInReg();
+		}).or(() => setIsJzzEngineReady(false));
+
+		// return () => {
+		// 	jzz?.close(); // 清理JZZ实例
+		// 	useMIDIPortsStore.getState().cleanup();
+		// };
+	}, [setIsWebMidiSupport, setIsJzzEngineReady, initJzz]);
 
 	return {
-		isWebMidiSupport, isJzzEngineReady, JZZ: JZZ
-	}
-}
-
+		isWebMidiSupport,
+		isJzzEngineReady,
+	};
+};
 
 const midiOutReg = () => {
-	JZZ.lib.registerMidiOut("乐理计算器VirtualOut", {
+	JZZ.lib.registerMidiOut("乐理计算器vOut", {
 		_info: () => ({
-			name: "乐理计算器VirtualOut",
-			id: "乐理计算器VirtualOut",
+			name: "乐理计算器vOut",
+			id: "乐理计算器vOut",
 			manufacturer:
 				"guohub.top",
 			version:

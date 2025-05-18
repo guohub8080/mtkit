@@ -15,12 +15,11 @@ import * as Tone from "tone"
 const Settings = (props: {}) => {
 	const {naviBarHeight} = useGlobalSettings()
 
-	const {setMidiLog, setIsPlayerActive} = useMidiKeyboardPlay()
+	const { setIsPlayerActive} = useMidiKeyboardPlay()
 
 	useEffect(() => {
 		// 加载音频文件
 		Tone.start().then(() => console.log("Tone.js引擎加载成功。"))
-		setMidiLog(false)
 		setIsPlayerActive(true)
 	}, [])
 

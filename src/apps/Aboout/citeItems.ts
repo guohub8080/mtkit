@@ -46,7 +46,9 @@ const citeItems = [
 	"OSMD",
 	"vexflow",
 	"react-toastify",
-	"react-hot-toast"
+	"react-hot-toast",
+	"react-select",
+	"react-draggable",
 ];
 
 export default citeItems;

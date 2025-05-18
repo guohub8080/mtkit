@@ -1,10 +1,14 @@
 // noinspection ES6PreferShortImport
 import useMIDIConfig from "@/assets/stores/useMIDIConfig.ts";
+import useMidiPortsStore from "@/assets/stores/useMidiPortsStore.ts";
+import useMIDIPortsStore from "@/assets/stores/useMidiPortsStore.ts";
 import * as music12 from "@/music12";
 import dt from "@/utils/guoDT.ts"
 import useMIDIPorts from "@/utils/useMIDI/useMIDIPorts.ts";
+import useMIDIReady from "@/utils/useMIDI/useMIDIReady.ts";
 import UseMIDIReady from "@/utils/useMIDI/useMIDIReady.ts";
 import {Dayjs} from "dayjs";
+import JZZ from "jzz";
 import {isEmpty, isNull, isNumber, isUndefined, sortBy} from "lodash";
 import {useEffect, useMemo, useState} from "react";
 
@@ -17,12 +21,18 @@ const useMidiEvents = () => {
 		eventList,
 		setEventList,
 		noteOnNumList,
-		setNoteOnNumList
-	} = useMIDIConfig()
-	const {isWebMidiSupport, isJzzEngineReady, JZZ} = UseMIDIReady()
-	const {inputs, outputs,} = useMIDIPorts()
+		setNoteOnNumList,
 
-	// const [noteOnNumList, setNoteOnNumList] = useState<number[]>([])
+	} = useMIDIConfig()
+	const {isWebMidiSupport, isJzzEngineReady} = UseMIDIReady()
+	const {inputs, outputs} = useMIDIPorts()
+	const {initJzz} = useMidiPortsStore()
+
+	const JzzInstance = useMemo(() => {
+		initJzz()
+		return useMIDIPortsStore.getState().jzzInstance
+	}, [isWebMidiSupport, isJzzEngineReady])
+
 	const clearNoteOnList = () => setNoteOnNumList([])
 
 	const clearEventList = () => setEventList([])
@@ -33,25 +43,29 @@ const useMidiEvents = () => {
 		if (inputs && inputs.length === 0) {
 			return setEventList([])
 		}
-		const unsubscribe = inputs.map((inputObj, index) =>
-			JZZ().openMidiIn(index).connect((msg) => {
-				const handle = JZZ.MIDI(msg)
-				if (isUndefined(handle.getChannel())) return
-				if (isUndefined(handle.getNote())) return
-				const isOn = handle.isNoteOn()
-				const isOff = handle.isNoteOff()
-				const velocity = handle.getVelocity()
-				const noteNumber: number = handle.getNote()
-				const readyPushObj = {
-					name: inputObj.name,
-					note: noteNumber,
-					isNoteOn: isOn,
-					isNoteOff: isOff,
-					velocity: velocity,
-					time: dt.getDayjs()
-				}
-				setLatestEvent(readyPushObj)
-			})
+		const unsubscribe = inputs?.map((inputObj, index) => {
+				if (isNull(JzzInstance)) return;
+				if (isUndefined(JzzInstance)) return;
+				// @ts-ignore
+				return JzzInstance.openMidiIn(index).connect((msg) => {
+					const handle = JZZ.MIDI(msg)
+					if (isUndefined(handle.getChannel())) return;
+					if (isUndefined(handle.getNote())) return;
+					const isOn = handle.isNoteOn()
+					const isOff = handle.isNoteOff()
+					const velocity = handle.getVelocity()
+					const noteNumber: number = handle.getNote()
+					const readyPushObj = {
+						name: inputObj.name,
+						note: noteNumber,
+						isNoteOn: isOn,
+						isNoteOff: isOff,
+						velocity: velocity,
+						time: dt.getDayjs()
+					}
+					setLatestEvent(readyPushObj)
+				})
+			}
 		);
 		return () => {
 			unsubscribe.forEach(u => u.disconnect());

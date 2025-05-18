@@ -13,30 +13,25 @@ import {BiSolidRightArrow} from "react-icons/bi";
 const MidiSelection = () => {
 	const {isJzzEngineReady, isWebMidiSupport} = useMIDIReady()
 	const midiPorts = useMIDIPorts()
-	const selectMidiOut = (out: string) => {
-		midiPorts.setCurrentOutPort(out)
-	}
-	useEffect(() => {
-		if (isEmpty(midiPorts.currentOutPort) && midiPorts.outputs.length > 0) {
-			midiPorts.setCurrentOutPort(midiPorts.outputs[0]["name"])
-		}
-	}, [midiPorts])
+	// const selectMidiOut = (out: string) => {
+	// 	midiPorts.setCurrentOutPort(out)
+	// }
+	// useEffect(() => {
+	// 	if (isEmpty(midiPorts.currentOutPort) && midiPorts.outputs.length > 0) {
+	// 		midiPorts.setCurrentOutPort(midiPorts.outputs[0]["name"])
+	// 	}
+	// }, [midiPorts])
 	if (!isJzzEngineReady || !isWebMidiSupport) return <NotSupportMidi/>
 	return <>
 		<div css={MidiSelection_css}>
 			<div style={{marginBottom: 10, color: googleColors.blue800}}>当前设备支持的MIDI设备</div>
 			<div className="ports_list">
 				{midiPorts.inputs.map((x, y) => <div className="port" key={`i${y}`}>
-					<div className="is_selected"></div>
 					<div className="port_type in">IN</div>
 					<div className="port_name">{x.name}</div>
 				</div>)}
 				{midiPorts.outputs.map((x, y) => <div
-					onClick={() => selectMidiOut(x.name)}
 					className="port" key={`o${y}`}>
-					<div className="is_selected">
-						{midiPorts.currentOutPort === x.name ? <BiSolidRightArrow size={20} color={googleColors.blue600}/> : <></>}
-					</div>
 					<div className="port_type out">OUT</div>
 					<div className="port_name">{x.name}</div>
 				</div>)}
@@ -55,6 +50,7 @@ const MidiSelection_css = css({
 	...cssFunctions.py(25),
 	"& .port": {
 		...cssPresets.flexCenter,
+		height: 35,
 		...cssPresets.defaultHoverAndActive as any,
 		"&>.is_selected": {
 			width: 25,
@@ -77,14 +73,15 @@ const MidiSelection_css = css({
 			backgroundColor: googleColors.orange500,
 			color: "white"
 		},
-		"&>.port_name": {
+		"& .port_name": {
 			width: "100%",
-			height: "100%",
+			lineHeight: "35px",
+			height: 35,
 			whiteSpace: "nowrap",
 			overflow: "hidden",
 			maxWidth: 180,
 			textOverflow: "ellipsis",
-			textAlign: "left"
+			textAlign: "left",
 		}
 	}
 })

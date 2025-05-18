@@ -1,4 +1,6 @@
 import useBeatFunctionsConfig from "@/assets/stores/useBeatFunctionsConfig.ts";
+import useMidiPortsStore from "@/assets/stores/useMidiPortsStore.ts";
+import usePcKeyboardConfig from "@/assets/stores/usePcKeyboardConfig.ts";
 import useCircleOfFifthsConfig from "./useCircleOfFifthsConfig.ts";
 import useGlobalSettings from "./useGlobalSettings.ts";
 import useIntervalConfig from "./useIntervalConfig.ts";
@@ -27,6 +29,8 @@ const useResetAllStores = () => {
 	const r12 = useExamConfig()
 	const r13 = useBeatFunctionsConfig()
 	const r14 = useBeatFunctionsConfig()
+	const r15 = usePcKeyboardConfig()
+	const r16 = useMidiPortsStore()
 	const resetAll = () => {
 		r1.resetStore()
 		r2.resetStore()
@@ -42,6 +46,8 @@ const useResetAllStores = () => {
 		r12.resetStore()
 		r13.resetStore()
 		r14.resetStore()
+		r15.resetStore()
+		r16.resetStore()
 	}
 	return {resetAll}
 }

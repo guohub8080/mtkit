@@ -1,12 +1,13 @@
 import MidiConfigTopBar from "@/apps/Spiano/components/MidiConfigTopBar.tsx";
+import DraggablePcKeyboard from "@/apps/Spiano/parts/DraggablePcKeyboard.tsx";
 import KeyStrokeAnalysis from "@/apps/Spiano/parts/KeyStrokeAnalysis.tsx";
 import MainNoMIDI from "@/apps/Spiano/parts/MainNoMIDI.tsx";
 import MidiEventsList from "@/apps/Spiano/parts/MidiEventsList.tsx";
 import MidiPiano from "@/apps/Spiano/parts/MidiPiano.tsx";
 import googleColors from "@/assets/colors/googleColors.ts";
-import useInstrument from "@/assets/instruments/useInstrument.ts";
 import useGlobalSettings from "@/assets/stores/useGlobalSettings.ts";
 import useMIDIConfig from "@/assets/stores/useMIDIConfig.ts";
+import useMIDIPortsStore from "@/assets/stores/useMidiPortsStore.ts";
 import cssFunctions from "@/assets/styles/cssFunctions.ts";
 import cssPresets from "@/assets/styles/cssPresets.ts";
 import useMidiEvents from "@/utils/useMIDI/useMidiEvents.ts";
@@ -14,19 +15,9 @@ import useMidiKeyboardPlay from "@/utils/useMIDI/useMidiKeyboardPlay.ts";
 import useMIDIPorts from "@/utils/useMIDI/useMIDIPorts.ts";
 import useMIDIReady from "@/utils/useMIDI/useMIDIReady.ts";
 import {css} from "@emotion/react";
-import React, {CSSProperties, ReactNode, useEffect, useRef, useState} from 'react';
+import React, {CSSProperties, ReactNode, useEffect, useLayoutEffect, useRef, useState} from 'react';
+import Draggable from 'react-draggable';
 
-// const keyMap = {
-// 	"a": 60,
-// 	"s": 65 - 12,
-// 	"d": 67 - 12,
-// 	"w": 69,
-// 	"j": 50,
-// 	"k": 56,
-// 	"l": 45,
-// 	"z": 48,
-// }
-// const keyList = keys(keyMap)
 
 const NoMidiSupport = ({isWebMidiSupport, isJzzEngineReady, outputs, inputs}) => {
 	const [showNoMidi, setShowNoMidi] = useState(false);
@@ -35,7 +26,7 @@ const NoMidiSupport = ({isWebMidiSupport, isJzzEngineReady, outputs, inputs}) =>
 	useEffect(() => {
 		if (hasRendered.current) return;
 		const timer = setTimeout(() => {
-			if (!(isWebMidiSupport && isJzzEngineReady) || (outputs.length === 0 || inputs.length === 0)) {
+			if (!(isWebMidiSupport && isJzzEngineReady)) {
 				setShowNoMidi(true);
 				hasRendered.current = true;
 			}
@@ -57,22 +48,36 @@ const FullFrame = (props: {
 	return <div style={{width: "100%", ...cssFunctions.px(15), ...cssPresets.flexCenter}}>{props.children}</div>
 }
 const Spiano = () => {
+	const {outputs, inputs} = useMIDIPorts()
 	const {isWebMidiSupport, isJzzEngineReady} = useMIDIReady()
 	const {noteOnNumList, latestEvent} = useMidiEvents()
+	const {isPlayerActive, setIsPlayerActive} = useMidiKeyboardPlay()
 	const {naviBarHeight} = useGlobalSettings()
-	const {outputs, inputs} = useMIDIPorts()
-	const {isMidiEventListShow, isPianoKeyboardShow, isAnalyzeShow} = useMIDIConfig()
-	const {player, setMidiLog} = useMidiKeyboardPlay()
+	const {isMidiEventListShow, isPianoKeyboardShow, isAnalyzeShow, setIsPcKeyboardShow} = useMIDIConfig()
+	if (import.meta.env.DEV) {
+		console.log(latestEvent)
+	}
+
+	const {initJzz} = useMIDIPortsStore()
+
+	useLayoutEffect(() => {
+		initJzz()
+	}, [isWebMidiSupport, isJzzEngineReady])
 
 	useEffect(() => {
-		setMidiLog(false)
-	}, [latestEvent])
+		setIsPlayerActive(true)
+		setIsPcKeyboardShow(false)
+	}, [])
+
 
 	return <div css={MidiTest_css(naviBarHeight)}>
 		<MidiConfigTopBar/>
+
+
 		<div className="main_inner_frame">
 			{isPianoKeyboardShow && <MidiPiano/>}
 			{isAnalyzeShow && <KeyStrokeAnalysis/>}
+			<DraggablePcKeyboard/>
 			{isMidiEventListShow && <MidiEventsList/>}
 			<NoMidiSupport
 				isWebMidiSupport={isWebMidiSupport}

@@ -1,4 +1,5 @@
 import {Dayjs} from "dayjs";
+import JZZ from "jzz";
 import {create} from 'zustand'
 import {immer} from 'zustand/middleware/immer'
 import {createJSONStorage, persist} from 'zustand/middleware'
@@ -65,6 +66,12 @@ type intervalConfigType = {
 	setIsAnalyzeShow: (i: boolean) => void
 	noteOnNumList: number[]
 	setNoteOnNumList: (i: number[]) => void
+	isBroadcastMidi: boolean
+	setIsBroadcastMidi: (i: boolean) => void
+	isPcKeyboardShow: boolean
+	setIsPcKeyboardShow: (i: boolean) => void
+	isPcKeyboardShowButMini: boolean
+	setIsPcKeyboardShowButMini: (i: boolean) => void
 }
 const defaultStore = {
 	isWebMidiSupport: false,
@@ -82,12 +89,31 @@ const defaultStore = {
 	isAnalyzeShow: true,//分析显示开关
 	eventList: [],
 	latestEvent: null,
-	noteOnNumList: []
+	noteOnNumList: [],
+	isBroadcastMidi: true, //是否广播MIDI消息
+	isPcKeyboardShow: false, //是否显示键盘
+	isPcKeyboardShowButMini: false, //是否显示键盘但是是小屏幕
+
 }
 const storeKey = "midiConfig"
 const useMIDIConfig = create<intervalConfigType>()(immer(persist(
 	(set) => ({
 		...defaultStore,
+		setIsBroadcastMidi: (i: boolean) => {
+			set((state) => {
+				state.isBroadcastMidi = i
+			})
+		},
+		setIsPcKeyboardShowButMini: (i: boolean) => {
+			set((state) => {
+				state.isPcKeyboardShowButMini = i
+			})
+		},
+		setIsPcKeyboardShow: (i: boolean) => {
+			set((state) => {
+				state.isPcKeyboardShow = i
+			})
+		},
 		setIsWebMidiSupport: (i: boolean) => {
 			set((state) => {
 				state.isWebMidiSupport = i
