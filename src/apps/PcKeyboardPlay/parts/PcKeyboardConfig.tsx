@@ -50,6 +50,8 @@ const PcKeyboardConfig = () => {
 					</div>
 					<Select
 						isDisabled={!isBroadcastMidi}
+						isClearable={false}
+						isSearchable={false}
 						onChange={(e) => {
 							setSelectedOutPortIndex(e?.value)
 						}}
