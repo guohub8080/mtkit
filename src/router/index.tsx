@@ -98,10 +98,10 @@ const r = createHashRouter([
 				path: routerPath.keyboard,
 				element: <PcKeyboardPlay/>
 			},
-			// {
-			//   path: routerPath.staveExam,
-			//   element: <StaveExam/>
-			// },
+			{
+				path: routerPath.staveExam,
+				element: <StaveExam/>
+			},
 			{
 				path: routerPath.spiano,
 				element: <Spiano/>

@@ -126,13 +126,13 @@ export default [
 		type: "tablet"
 	},
 
-	// {
-	//   link: `/${routerPath.staveExam}`,
-	//   title: "识谱小测试",
-	//   subtitle: "可用来随机出题巩固记忆",
-	//   imgURL: exam_svg,
-	//   type: "all"
-	// },
+	{
+	  link: `/${routerPath.staveExam}`,
+	  title: "识谱小测试",
+	  subtitle: "可用来随机出题巩固记忆",
+	  imgURL: exam_svg,
+	  type: "all"
+	},
 
 
 	{

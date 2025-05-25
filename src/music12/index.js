@@ -18324,8 +18324,9 @@ var getScaleByStaveAlters = (staveAlter) => {
 };
 
 // src/stave/methods/getAlterStepListByNum.ts
+import { reverse } from "lodash";
 var li = ["F", "C", "G", "D", "A", "E", "B"];
-var liReverse = li.reverse();
+var liReverse = reverse([...li]);
 var getAlterStepListByNum = (num) => {
   if (num === 0) return [];
   if (num > 7 || num < -7) throw new Error("num must be between -7 and 7");
